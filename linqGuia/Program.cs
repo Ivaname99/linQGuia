@@ -43,7 +43,7 @@ listaCasa.Add(new Casa
 listaHabitante.Add(new Habitante{
     IdHabitante= 1,
     Nombre = "Ever",
-    Edad = 36,
+    Edad = 50,
     IdCasa= 1,
 });
 
@@ -51,7 +51,7 @@ listaHabitante.Add(new Habitante
 {
     IdHabitante = 2,
     Nombre = "Alfredo",
-    Edad = 36,
+    Edad = 666,
     IdCasa = 1,
 });
 
@@ -69,4 +69,35 @@ listaHabitante.Add(new Habitante
 
 IEnumerable<Habitante> listaEdad =  //Permite crear listas dentro de el
     from obTem in listaHabitante where obTem.Edad >= 40 select obTem;
+
+foreach( var it in listaEdad)
+{
+    Console.WriteLine( it.datosHabitante());
+};
+#endregion
+
+#region sentenciaLinQ 
+
+IEnumerable<Habitante> ListaEdad = from ObjetoProvicional
+                                   in listaHabitante
+                                   where ObjetoProvicional.Edad > 40
+                                   select ObjetoProvicional;
+
+foreach (Habitante objetoProcicional2 in ListaEdad)
+{
+    Console.WriteLine(objetoProcicional2.datosHabitante());
+}
+
+//Join
+IEnumerable<Habitante> listaCasaGothan = from objetoTemporalHabitante in listaHabitante
+                                         join objetoTemporalCasa in listaCasa
+                                         on objetoTemporalHabitante.IdHabitante equals objetoTemporalCasa.Id
+                                         where objetoTemporalCasa.Ciudad == "Gothan City"
+                                         select objetoTemporalHabitante;
+Console.WriteLine("----------------------------------------------------------------------------------------------");
+foreach (Habitante h in listaCasaGothan)
+{
+    Console.WriteLine(h.datosHabitante());
+}
+
 #endregion
