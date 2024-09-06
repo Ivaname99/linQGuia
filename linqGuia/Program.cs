@@ -1,8 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using linqGuia;
 
-Console.WriteLine("Hello, World!");
-
 // LinQ
 
 #region Modelos
@@ -18,23 +16,24 @@ listaCasa.Add( new Casa {
     Id = 1,
     Direccion = "3 vn chalatenango",
     Ciudad = "Chalatenango",
-    numeroHabitaciones = 20,
+    NumeroHabitaciones = 20,
 }); // Clase anonima, no se puede escribir?? sobre ellas , solo son de lectura
+    // No se les pueden agregar metodos y no pueden heredar de otras clases
 
 listaCasa.Add(new Casa
 {
-    Id = 1,
+    Id = 2,
     Direccion = "3 vn chalatenango",
     Ciudad = "San Salvador",
-    numeroHabitaciones = 30,
+    NumeroHabitaciones = 30,
 });
 
 listaCasa.Add(new Casa
 {
-    Id = 1,
+    Id = 3,
     Direccion = "3 vn chalatenango",
-    Ciudad = "San Miguel",
-    numeroHabitaciones = 30,
+    Ciudad = "Gothan City",
+    NumeroHabitaciones = 30,
 });
 #endregion
 
@@ -52,7 +51,7 @@ listaHabitante.Add(new Habitante
     IdHabitante = 2,
     Nombre = "Alfredo",
     Edad = 666,
-    IdCasa = 1,
+    IdCasa = 2,
 });
 
 listaHabitante.Add(new Habitante
@@ -60,20 +59,9 @@ listaHabitante.Add(new Habitante
     IdHabitante = 3,
     Nombre = "Ricardo",
     Edad = 36,
-    IdCasa = 1,
+    IdCasa = 3,
 });
 
-#endregion
-
-#region SentenciasLinQ
-
-IEnumerable<Habitante> listaEdad =  //Permite crear listas dentro de el
-    from obTem in listaHabitante where obTem.Edad >= 40 select obTem;
-
-foreach( var it in listaEdad)
-{
-    Console.WriteLine( it.datosHabitante());
-};
 #endregion
 
 #region sentenciaLinQ 
@@ -81,7 +69,7 @@ foreach( var it in listaEdad)
 IEnumerable<Habitante> ListaEdad = from ObjetoProvicional
                                    in listaHabitante
                                    where ObjetoProvicional.Edad > 40
-                                   select ObjetoProvicional;
+                                   select ObjetoProvicional; //Permite crear listas dentro de él
 
 foreach (Habitante objetoProcicional2 in ListaEdad)
 {
@@ -100,4 +88,29 @@ foreach (Habitante h in listaCasaGothan)
     Console.WriteLine(h.datosHabitante());
 }
 
+#endregion
+
+#region FirsthAndFirsthOrDefault
+
+Console.WriteLine("--------------------------------------------------------------------------");
+var primeraCasa = listaCasa.First();
+Console.WriteLine(primeraCasa.dameDatosCasa());
+
+Habitante personaEdad = (from tempItem
+                         in listaHabitante where tempItem.Edad >38
+                         select tempItem).First();
+Console.WriteLine(personaEdad.datosHabitante());
+
+// LAMBDA
+Console.WriteLine("---------------------------Lo mismo pero con lambdas---------------------------------------------------------");
+var Habitante1 = listaHabitante.First(objectTemp => objectTemp.Edad > 38);
+Console.WriteLine(Habitante1.datosHabitante());
+
+Casa CasaConFirsthOrDedault = listaCasa.FirstOrDefault(vCasa => vCasa.Id > 1);
+if (CasaConFirsthOrDedault == null)
+{
+    Console.WriteLine("No existe el elemento");
+    return;
+}
+Console.WriteLine("Si existe el elemento");
 #endregion
