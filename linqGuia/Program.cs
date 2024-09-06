@@ -91,8 +91,8 @@ foreach (Habitante h in listaCasaGothan)
 #endregion
 
 #region FirsthAndFirsthOrDefault
-
-Console.WriteLine("--------------------------------------------------------------------------");
+// LINQ
+Console.WriteLine("---------------------------LINQ---------------------------------------");
 var primeraCasa = listaCasa.First();
 Console.WriteLine(primeraCasa.dameDatosCasa());
 
@@ -102,7 +102,7 @@ Habitante personaEdad = (from tempItem
 Console.WriteLine(personaEdad.datosHabitante());
 
 // LAMBDA
-Console.WriteLine("---------------------------Lo mismo pero con lambdas---------------------------------------------------------");
+Console.WriteLine("---------------------------Lambda-------------------------------------");
 var Habitante1 = listaHabitante.First(objectTemp => objectTemp.Edad > 38);
 Console.WriteLine(Habitante1.datosHabitante());
 
@@ -113,4 +113,21 @@ if (CasaConFirsthOrDedault == null)
     return;
 }
 Console.WriteLine("Si existe el elemento");
+#endregion
+
+#region Last
+Casa ultimaCasa = listaCasa.Last(temp => temp.Id > 1);
+Console.WriteLine(ultimaCasa.dameDatosCasa());
+Console.WriteLine("___________________________________________________");
+var h1 = (from objHabitante 
+          in listaHabitante 
+          where objHabitante.Edad > 700 
+          select objHabitante)
+    .LastOrDefault();
+if (h1 == null)
+{
+    Console.WriteLine("Ocurrio un error");
+    return;
+}
+Console.WriteLine(h1.datosHabitante());
 #endregion
