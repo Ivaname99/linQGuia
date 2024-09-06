@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace linqGuia
 {
+    // Define la clase Enfermero que hereda de la clase Empleado
     public class Enfermero : Empleado
     {
         public string nombre { get; set; }

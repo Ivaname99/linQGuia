@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace linqGuia
 {
+    // Define la clase Empleado
     public class Empleado
     {
         public string nombre { get; set; }
